@@ -2,7 +2,7 @@ import React from 'react'
 
 function WelcomeScreen() {
   return (
-    <div>WelcomeScreen</div>
+    <div>Welcome to the Manga and Anime Tracker app</div>
   )
 }
 
