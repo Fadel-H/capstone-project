@@ -1,7 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 
 function Registration() {
+  const [register, setRegister] = useState({
+    username: "",
+    email: "",
+    password: ""
+  })
+
+  function onChange(e){
+    if (e.target.name=== "username"){
+      setRegister({...register, username: e.target.value})
+    } else if (e.target.name=== "email") {
+      setRegister({...register, email: e.target.value})
+    } else {
+      setLogin({...login, password: e.target.value})
+    }
+  }
   return (
     <section className="vh-100">
     <div className="mask d-flex align-items-center h-100 gradient-custom-3">
@@ -14,20 +29,16 @@ function Registration() {
   
                 <form>
                   <div className="form-outline mb-4">
-                    <input type="text" id="form3Example1cg" className="form-control form-control-lg" />
+                    <input type="text" id="form3Example1cg" className="form-control form-control-lg" onChange={onChange} />
                     <label className="form-label" for="form3Example1cg">Your Name</label>
                   </div>
                   <div className="form-outline mb-4">
-                    <input type="email" id="form3Example3cg" className="form-control form-control-lg" />
+                    <input type="email" id="form3Example3cg" className="form-control form-control-lg" onChange={onChange} />
                     <label className="form-label" for="form3Example3cg">Your Email</label>
                   </div>
                   <div className="form-outline mb-4">
-                    <input type="password" id="form3Example4cg" className="form-control form-control-lg" />
+                    <input type="password" id="form3Example4cg" className="form-control form-control-lg" onChange={onChange} />
                     <label className="form-label" for="form3Example4cg">Password</label>
-                  </div>
-                  <div className="form-outline mb-4">
-                    <input type="password" id="form3Example4cdg" className="form-control form-control-lg" />
-                    <label className="form-label" for="form3Example4cdg">Repeat your password</label>
                   </div>
                   <div className="d-flex justify-content-center">
                     <button type="button" className="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
