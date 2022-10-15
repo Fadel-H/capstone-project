@@ -6,7 +6,7 @@ class CreateMangas < ActiveRecord::Migration[6.1]
       t.float :score
       t.integer :chapters
       t.string :status
-      t.datetime :last_update
+      t.string :image
       t.string :author
       t.string :artist
       t.integer :reviews_id

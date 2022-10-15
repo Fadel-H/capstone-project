@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
-import { json } from 'react-router-dom'
+import React, {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 
-
-function Registration() {
+function Registration({status,setStatus}) {
+  const navigate = useNavigate()
   const [register, setRegister] = useState({
     username: "",
     email: "",
@@ -11,7 +11,6 @@ function Registration() {
 
   function handleOnSubmit(e){
     e.preventDefault()
-    console.log("test")
     fetch("/sign-up",{
       method: "POST",
       headers: {
@@ -19,10 +18,21 @@ function Registration() {
       },
       body: JSON.stringify(register)
     }
-    ).then(resp => resp.json())
-    .then(user => console.log(user))
+    ).then(resp => {resp.json()
+    setStatus(resp.status)
+  }
+    )
     .catch(errors => console.log(errors))
   }
+
+  useEffect(() => {
+    if (status === 200){
+      navigate("/login")
+      setStatus("")
+    }
+  }, [status, navigate, setStatus])
+
+
 
   function onChange(e){
     if (e.target.name=== "username"){
@@ -45,23 +55,20 @@ function Registration() {
   
                 <form onSubmit={handleOnSubmit}>
                   <div className="form-outline mb-4">
-                    <input name="username" type="text" id="form3Example1cg" className="form-control form-control-lg" onChange={onChange} />
+                    <input name="username" type="text" id="form3Example1cg" className="form-control form-control-lg" onChange={onChange} placeholder="username" />
                     <label className="form-label" >Username</label>
                   </div>
                   <div className="form-outline mb-4">
-                    <input name="email" type="email" id="form3Example3cg" className="form-control form-control-lg" onChange={onChange} />
+                    <input name="email" type="email" id="form3Example3cg" className="form-control form-control-lg" onChange={onChange} placeholder="email" />
                     <label className="form-label">Email</label>
                   </div>
                   <div className="form-outline mb-4">
-                    <input name="password" type="password" id="form3Example4cg" className="form-control form-control-lg" onChange={onChange} />
+                    <input name="password" type="password" id="form3Example4cg" className="form-control form-control-lg" onChange={onChange} placeholder="password"/>
                     <label className="form-label">Password</label>
                   </div>
                   <div className="d-flex justify-content-center">
                     <button type="submit" className="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
-                  </div>
-  
-                  {/* <p className="text-center text-muted mt-5 mb-0">Already have an account?<Link to="Registration" className="fw-bold text-primary"><u>register here</u></Link></p> */}
-  
+                  </div>  
                 </form>
   
               </div>
