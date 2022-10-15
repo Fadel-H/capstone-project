@@ -49,3 +49,7 @@ group :test do
 end
 
 gem "active_model_serializers", "~> 0.10.12"
+
+gem "httparty", "~> 0.20.0"
+
+gem "awesome_print", "~> 1.9"
